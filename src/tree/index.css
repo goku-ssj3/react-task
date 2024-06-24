@@ -1,6 +1,28 @@
 .tree {
+  display: flex;
+  flex-direction: column;
   background-color: #efefef;
   height: 100%;
   padding: 10px;
   font-family: monospace;
+}
+
+.ant-bear {
+  margin-left: 38px;
+}
+
+.cat-dog {
+  margin-left: 76px;
+}
+
+.elephant {
+  margin-left: 114px;
+}
+
+.frog {
+  margin-left: 38px;
+}
+
+.dolphin {
+  margin-left: 76px;
 }

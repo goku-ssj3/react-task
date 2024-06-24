@@ -3,16 +3,26 @@ import "./index.css";
 const Tree = () => {
   return (
     <div className="tree">
+      <div>
       root
-      <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;ant <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;bear <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cat <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dog <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elephant{" "}
-      <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;frog <br />
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dolphin <br />
+      </div>
+      <div className="ant-bear">
+      ant <br />
+      bear
+      </div>
+      <div className="cat-dog">
+      cat <br />
+      dog
+      </div>
+      <div className="elephant">
+      elephant{" "}
+      </div>
+      <div className="frog">
+      frog
+      </div>
+      <div className="dolphin">
+      dolphin
+      </div>
     </div>
   );
 };
