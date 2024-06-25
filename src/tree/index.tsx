@@ -1,22 +1,24 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, KeyboardEvent} from 'react';
 import "./index.css";
 import initData from './data.json';
 
+type NodeObj = {
+  children: string[];
+  id: string;
+  value: string;
+}
+
 const Tree = () => {
-  const [nodes, setNodes] = useState(initData.tree.nodes);
+  const [nodes, setNodes] = useState<NodeObj[]>(initData.tree.nodes);
   const [inputVisible, setInputVisible] = useState({});
-  const [inputValue, setInputValue] = useState();
 
-  const onAdd = (nodeVal, inputVal) => {
-    setInputValue(nodeVal[inputVal] = true);
-  }
-
-  const handleKeyDown = (event, val) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>, val: string) => {
     if (event.keyCode === 13) {
+      event.preventDefault();
       setNodes(prevNodes => {
-        const child = prevNodes.find(node => node.children.find(child => child === val));
+        const child: NodeObj | undefined = prevNodes.find(node => node.children.find(child => child === val));
         const childIdx = prevNodes.findIndex(node => node.children.find(child => child === val));
-        child.children.push(event.target.value);
+        child!.children.push(event.target.value);
         prevNodes[childIdx] = child;
         const newNode = {
           "children": [], 
@@ -28,7 +30,7 @@ const Tree = () => {
     }
   }
 
-  const onRemove = (val) => {
+  const onRemove = (val: string) => {
       const prevNodes = [...nodes];
       const child = prevNodes.find(node => node.children.find(child => child === val));
       const childIdx = prevNodes.findIndex(node => node.children.find(child => child === val));
@@ -42,7 +44,7 @@ const Tree = () => {
     };
 
   useEffect(() => {
-    let inputObject = {};
+    const inputObject: unknown = {};
     for (const node of nodes) {
       if (node.children.length > 0) {
         inputObject[node.children[node.children.length - 1]] = true;
@@ -50,7 +52,7 @@ const Tree = () => {
     }
     setInputVisible(inputObject);
   }, [nodes])
-
+  // alert(inputValue);
   return (
     <div className="tree">
       {nodes.map((node, index) => {
@@ -65,7 +67,7 @@ const Tree = () => {
             <br />
             <div>
             {inputVisible[node.value] && (
-              <input type="text" value={inputValue} onChange={(e) => onAdd(node.value, e.target.value)} onKeyDown={(e) => handleKeyDown(e, node.value)}/>
+              <input type="text" onKeyDown={(e) => handleKeyDown(e, node.value)}/>
             )}
 
             </div>
