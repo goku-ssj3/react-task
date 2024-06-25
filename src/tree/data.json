@@ -1,38 +1,15 @@
-[
-  {
-    "NodeName": "root",
-    "Children": [
-      {
-        "NodeName": "ant",
-        "Children": []
-      },
-      {
-        "NodeName": "bear",
-        "Children": [
-          {
-            "NodeName": "cat",
-            "Children": []
-          },
-          {
-            "NodeName": "dog",
-            "Children": [
-              {
-                "NodeName": "elephant",
-                "Children": []
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "NodeName": "frog",
-        "Children": [
-          {
-            "NodeName": "dolphin",
-            "Children": []
-          }
-        ]
-      }
-    ]
+{
+  "tree": {
+    "nodes": [
+      { "children": ["ant", "bear", "frog"], "id": "root", "value": "root" },
+      { "children": [], "id": "ant", "value": "ant" },
+      { "children": ["cat", "dog"], "id": "bear", "value": "bear" },
+      { "children": [], "id": "cat", "value": "cat" },
+      { "children": ["elephant"], "id": "dog", "value": "dog" },
+      { "children": [], "id": "elephant", "value": "elephant" },
+      { "children": ["dolphin"], "id": "frog", "value": "frog" },
+      { "children": [], "id": "dolphin", "value": "dolphin" }
+    ],
+    "startNode": "root"
   }
-]
+}

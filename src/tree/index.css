@@ -7,11 +7,15 @@
   font-family: monospace;
 }
 
-.ant-bear {
+.root {
+  margin-left: 0px;
+}
+
+.ant, .bear, .frog {
   margin-left: 38px;
 }
 
-.cat-dog {
+.cat, .dog {
   margin-left: 76px;
 }
 
@@ -19,10 +23,10 @@
   margin-left: 114px;
 }
 
-.frog {
-  margin-left: 38px;
-}
-
 .dolphin {
   margin-left: 76px;
+}
+
+button {
+  border: none;
 }

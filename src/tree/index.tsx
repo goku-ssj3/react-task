@@ -1,29 +1,77 @@
+import {useState, useEffect} from 'react';
 import "./index.css";
-import data from './data.json';
+import initData from './data.json';
 
 const Tree = () => {
+  const [nodes, setNodes] = useState(initData.tree.nodes);
+  const [inputVisible, setInputVisible] = useState({});
+  const [inputValue, setInputValue] = useState();
+
+  const onAdd = (nodeVal, inputVal) => {
+    setInputValue(nodeVal[inputVal] = true);
+  }
+
+  const handleKeyDown = (event, val) => {
+    if (event.keyCode === 13) {
+      setNodes(prevNodes => {
+        const child = prevNodes.find(node => node.children.find(child => child === val));
+        const childIdx = prevNodes.findIndex(node => node.children.find(child => child === val));
+        child.children.push(event.target.value);
+        prevNodes[childIdx] = child;
+        const newNode = {
+          "children": [], 
+          "id": event.target.value, 
+          "value": event.target.value
+        };
+        return [...prevNodes, newNode];
+      });
+    }
+  }
+
+  const onRemove = (val) => {
+      const prevNodes = [...nodes];
+      const child = prevNodes.find(node => node.children.find(child => child === val));
+      const childIdx = prevNodes.findIndex(node => node.children.find(child => child === val));
+      const childrenIdx = child.children.indexOf(val);
+      if (childrenIdx !== -1) {
+        child.children.splice(childrenIdx, 1);
+        prevNodes[childIdx] = child;
+      }
+      const updatedNodes = prevNodes.filter(node => node.value !== val);
+      setNodes(updatedNodes);
+    };
+
+  useEffect(() => {
+    let inputObject = {};
+    for (const node of nodes) {
+      if (node.children.length > 0) {
+        inputObject[node.children[node.children.length - 1]] = true;
+      }
+    }
+    setInputVisible(inputObject);
+  }, [nodes])
+
   return (
     <div className="tree">
-      <div>
-        {data[0].NodeName}
-      </div>
-      <div className="ant-bear">
-        {data[0].Children[0].NodeName} <br />
-        {data[0].Children[1].NodeName}
-      </div>
-      <div className="cat-dog">
-        {data[0].Children[1].Children[0].NodeName} <br />
-        {data[0].Children[1].Children[1].NodeName}
-      </div>
-      <div className="elephant">
-        {data[0].Children[1].Children[1].Children[0].NodeName}{" "}
-      </div>
-      <div className="frog">
-        {data[0].Children[2].NodeName}
-      </div>
-      <div className="dolphin">
-        {data[0].Children[2].Children[0].NodeName}
-      </div>
+      {nodes.map((node, index) => {
+        return (
+          <div className={node.value}>
+            {node.value}
+            {node.value !== 'root' && (
+              <button onClick={() => onRemove(node.value)}>
+                ❌
+              </button> 
+            )}
+            <br />
+            <div>
+            {inputVisible[node.value] && (
+              <input type="text" value={inputValue} onChange={(e) => onAdd(node.value, e.target.value)} onKeyDown={(e) => handleKeyDown(e, node.value)}/>
+            )}
+
+            </div>
+          </div>
+        )
+      })}
     </div>
   );
 };
