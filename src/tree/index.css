@@ -7,25 +7,22 @@
   font-family: monospace;
 }
 
-.root {
+.zero {
   margin-left: 0px;
 }
 
-.ant, .bear, .frog {
+.one {
   margin-left: 38px;
 }
 
-.cat, .dog {
+.two {
   margin-left: 76px;
 }
 
-.elephant {
+.three {
   margin-left: 114px;
 }
 
-.dolphin {
-  margin-left: 76px;
-}
 
 button {
   border: none;
