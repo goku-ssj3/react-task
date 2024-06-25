@@ -1,1 +1,38 @@
-{}
+[
+  {
+    "NodeName": "root",
+    "Children": [
+      {
+        "NodeName": "ant",
+        "Children": []
+      },
+      {
+        "NodeName": "bear",
+        "Children": [
+          {
+            "NodeName": "cat",
+            "Children": []
+          },
+          {
+            "NodeName": "dog",
+            "Children": [
+              {
+                "NodeName": "elephant",
+                "Children": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "NodeName": "frog",
+        "Children": [
+          {
+            "NodeName": "dolphin",
+            "Children": []
+          }
+        ]
+      }
+    ]
+  }
+]
