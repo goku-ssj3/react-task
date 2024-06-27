@@ -36,15 +36,35 @@ const Tree = () => {
 
   const onRemove = (val: string) => {
       const prevNodes = [...nodes];
-      const child = prevNodes.find(node => node.children.find(child => child === val));
-      const childIdx = prevNodes.findIndex(node => node.children.find(child => child === val));
-      const childrenIdx = child.children.indexOf(val);
+      const selectedElementIdxInParent = prevNodes.findIndex(node => node.children.find(child => child === val));
 
-      if (childrenIdx !== -1) {
-        child.children.splice(childrenIdx, 1);
-        prevNodes[childIdx] = child;
+      //Remove selected element from parent's children array
+      if (selectedElementIdxInParent !== - 1) {
+        const selectedElementInParent = prevNodes.find(node => node.children.find(child => child === val));
+        const selectedElementIdxInChildren = selectedElementInParent.children.indexOf(val);
+        selectedElementInParent.children.splice(selectedElementIdxInChildren, 1);
+        prevNodes[selectedElementIdxInParent] = selectedElementInParent;
       }
       
+      //Remove children of selected element and their children(if any) from nodes array
+      const selectedNode = prevNodes.find(node => node.value === val);
+      for (const child1 of selectedNode.children) {
+        let childIdx1 = prevNodes.findIndex(node => node.value === child1);
+          if (childIdx1 !== -1) {
+            if (prevNodes[childIdx1].children.length === 0) {
+              prevNodes.splice(childIdx1, 1);
+            } else {
+              for (const child2 of prevNodes[childIdx1].children) {
+                const childIdx2 = prevNodes.findIndex(node => node.value === child2);
+                prevNodes.splice(childIdx2, 1);
+              }
+              childIdx1 = prevNodes.findIndex(node => node.value === child1);
+              prevNodes.splice(childIdx1, 1);
+            }
+          }
+      }
+
+      //Remove selected element from nodes array
       const updatedNodes = prevNodes.filter(node => node.value !== val);
       setNodes(updatedNodes);
     };
