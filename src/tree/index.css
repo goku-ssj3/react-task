@@ -7,6 +7,10 @@
   font-family: monospace;
 }
 
+.minus {
+  margin-left: -38px;
+}
+
 .zero {
   margin-left: 0px;
 }
